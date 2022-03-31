@@ -4,7 +4,7 @@ import threading
 
 #rendezvous = ('147.182.184.215', 55555)
 
-rendezvous = ('155.41.21.11', 55555)
+rendezvous = ('172.20.10.2', 55555)
 
 # connect to rendezvous
 print('connecting to rendezvous server')
@@ -37,6 +37,7 @@ print('punching hole')
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(('0.0.0.0', sport))
 sock.sendto(b'0', (ip, dport))
+sock.close()
 
 print('ready to exchange messages\n')
 
