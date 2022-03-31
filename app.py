@@ -3,16 +3,10 @@ from flask import Flask, escape, request, json, render_template, request, redire
 from flask_socketio import SocketIO, join_room, leave_room
 
 import getpass
-import pymongo
-
-from random import randint
-from flask_cors import CORS
 
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/')
