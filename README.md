@@ -8,7 +8,7 @@
 
 ### Table of Contents:
 * [Project Overview](#projectoverview)
-* [Server](#server)
+* [Implementations](#implementations)
 * [Running the Project](#runningapp)
 
 <a name="projectoverview"></a> 
@@ -20,10 +20,11 @@
 * We used UDP to implement Peer to Peer messsaging. 
 * A rendezvous server was used to facilitate the connection proccess
    
-   
-<a name="server"></a> 
-### Server and Client: ###
-* This real-time chat functionality is accomplished through a bi-directional communication channel, meaning that the server can send data back to the client independently without any requests. There are 3 specific event handlers to listen to, respectively to send a message, join a room, and leave a room:
+<a name="implementations"></a> 
+### Implementations: ###
+
+#### 1. Server and Client: ####
+* This real-time chat functionality is accomplished through a bi-directional communication channel, meaning that the server can send data back to the client independently without any requests. There are 3 specific event handlers to listen to, respectively to send a message, join a room, and leave a room from *app.py*:
 ```
 def handle_send_message_event(data):
     app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
@@ -47,7 +48,7 @@ def handle_leave_room_event(data):
 ```
 * The user will first be prompted to log in with a name to be displayed, followed by being able to join a chat room, see who joins, and chat with multiple people at once.
 
-### Server: ###
+#### 2. Server: ####
 * Users can be discovered via a centralized server. This means users can update the IP address for peer to peer communications.
 * The client needs to make sure the IP address in discovery server is correct. 
 * When a user is discovered, clients can send them any updates or new chats.
