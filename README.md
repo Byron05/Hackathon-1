@@ -22,6 +22,31 @@
    
    
 <a name="server"></a> 
+### Server and Client: ###
+* This real-time chat functionality is accomplished through a bi-directional communication channel, meaning that the server can send data back to the client independently without any requests. There are 3 specific event handlers to listen to, respectively to send a message, join a room, and leave a room:
+```
+def handle_send_message_event(data):
+    app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
+                                                                    data['room'],
+                                                                    data['message']))
+    socketio.emit('receive_message', data, room=data['room'])
+```
+```
+@socketio.on('join_room')
+def handle_join_room_event(data):
+    app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
+    join_room(data['room'])
+    socketio.emit('join_room_announcement', data, room=data['room'])
+```
+```
+@socketio.on('leave_room')
+def handle_leave_room_event(data):
+    app.logger.info("{} has left the room {}".format(data['username'], data['room']))
+    leave_room(data['room'])
+    socketio.emit('leave_room_announcement', data, room=data['room'])
+```
+* The user will first be prompted to log in with a name to be displayed, followed by being able to join a chat room, see who joins, and chat with multiple people at once.
+
 ### Server: ###
 * Users can be discovered via a centralized server. This means users can update the IP address for peer to peer communications.
 * The client needs to make sure the IP address in discovery server is correct. 
